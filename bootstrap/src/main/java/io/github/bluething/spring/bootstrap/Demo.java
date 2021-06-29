@@ -1,6 +1,5 @@
 package io.github.bluething.spring.bootstrap;
 
-import io.github.bluething.spring.bootstrap.harcoded.DevelopmentOnlyCustomerService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.util.Assert;
 
@@ -8,7 +7,7 @@ import java.util.stream.Stream;
 
 @Log4j2
 public class Demo {
-    public static void workWithCustomerService(Class<?> label, DevelopmentOnlyCustomerService customerService) {
+    public static void workWithCustomerService(Class<?> label, CustomerService customerService) {
         log.info(" ======");
         log.info(label.getName());
         log.info("======");
