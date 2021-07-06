@@ -9,7 +9,7 @@ import java.util.Collection;
 
 public class TransactionTemplateCustomerService extends BaseCustomerService {
     private final TransactionTemplate transactionTemplate;
-    protected TransactionTemplateCustomerService(DataSource ds, TransactionTemplate transactionTemplate) {
+    public TransactionTemplateCustomerService(DataSource ds, TransactionTemplate transactionTemplate) {
         super(ds);
         this.transactionTemplate = transactionTemplate;
     }
