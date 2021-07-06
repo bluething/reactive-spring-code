@@ -3,6 +3,7 @@ package io.github.bluething.spring.bootstrap.context;
 import io.github.bluething.spring.bootstrap.CustomerService;
 import io.github.bluething.spring.bootstrap.DataSourceConfiguration;
 import io.github.bluething.spring.bootstrap.Demo;
+import io.github.bluething.spring.bootstrap.SpringUtils;
 import io.github.bluething.spring.bootstrap.templates.TransactionTemplateCustomerService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
