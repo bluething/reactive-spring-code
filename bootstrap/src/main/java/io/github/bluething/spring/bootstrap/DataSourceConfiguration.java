@@ -1,10 +1,13 @@
 package io.github.bluething.spring.bootstrap;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.sql.DataSource;
 import java.sql.Driver;
@@ -22,6 +25,16 @@ public class DataSourceConfiguration {
             DriverManagerDataSource dataSource = new DriverManagerDataSource(url, userName, password);
             dataSource.setDriverClassName(driverClass.getName());
             return dataSource;
+        }
+    }
+
+    @Configuration
+    @Profile("default")
+    @PropertySource("application-default.properties")
+    public static class DevelopmentConfiguration {
+        @Bean
+        DataSource developmentDataSource() {
+            return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build();
         }
     }
 }
