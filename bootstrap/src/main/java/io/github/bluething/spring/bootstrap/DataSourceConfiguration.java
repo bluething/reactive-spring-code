@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 import java.sql.Driver;
@@ -18,7 +19,9 @@ public class DataSourceConfiguration {
                                         @Value("${spring.datasource.username}") String userName,
                                         @Value("${spring.datasource.password}") String password,
                                         @Value("${spring.datasource.driver-class-name}") Class<Driver> driverClass) {
-
+            DriverManagerDataSource dataSource = new DriverManagerDataSource(url, userName, password);
+            dataSource.setDriverClassName(driverClass.getName());
+            return dataSource;
         }
     }
 }
