@@ -37,4 +37,9 @@ public class DataSourceConfiguration {
             return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build();
         }
     }
+
+    @Bean
+    DataSourcePostProcessor dataSourcePostProcessor() {
+        return new DataSourcePostProcessor();
+    }
 }
