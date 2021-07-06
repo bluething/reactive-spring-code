@@ -1,6 +1,8 @@
 package io.github.bluething.spring.bootstrap;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -41,5 +43,16 @@ public class DataSourceConfiguration {
     @Bean
     DataSourcePostProcessor dataSourcePostProcessor() {
         return new DataSourcePostProcessor();
+    }
+
+    private static class DataSourcePostProcessor implements BeanPostProcessor {
+
+        @Override
+        public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+            if (bean instanceof DataSource) {
+                DataSourceUtils.initializeDdl(DataSource.class.cast(bean));
+            }
+            return bean;
+        }
     }
 }
