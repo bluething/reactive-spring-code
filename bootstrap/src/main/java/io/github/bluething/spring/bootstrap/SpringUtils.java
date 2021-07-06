@@ -8,6 +8,10 @@ public class SpringUtils {
     public static ConfigurableApplicationContext run(Class<?> sources, String profile) {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
 
+        if (StringUtils.hasText(profile)) {
+            applicationContext.getEnvironment().setActiveProfiles(profile);
+        }
+
         return applicationContext;
     }
 }
