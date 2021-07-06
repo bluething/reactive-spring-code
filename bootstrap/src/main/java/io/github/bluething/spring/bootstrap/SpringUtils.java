@@ -12,6 +12,9 @@ public class SpringUtils {
             applicationContext.getEnvironment().setActiveProfiles(profile);
         }
 
+        applicationContext.register(sources);
+        applicationContext.refresh();
+
         return applicationContext;
     }
 }
