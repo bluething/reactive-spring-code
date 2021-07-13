@@ -20,6 +20,7 @@ public class DataSourceConfiguration {
     @Profile("prod")
     @PropertySource("application-prod.properties")
     public static class ProductionConfiguration {
+        @Bean
         DataSource productionDataSource(@Value("${spring.datasource.url}") String url,
                                         @Value("${spring.datasource.username}") String userName,
                                         @Value("${spring.datasource.password}") String password,
