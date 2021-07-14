@@ -1,6 +1,10 @@
 package io.github.bluething.spring.bootstrap.enable;
 
+import io.github.bluething.spring.bootstrap.CustomerService;
 import io.github.bluething.spring.bootstrap.DataSourceConfiguration;
+import io.github.bluething.spring.bootstrap.Demo;
+import io.github.bluething.spring.bootstrap.SpringUtils;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -23,5 +27,13 @@ public class Application {
     @Bean
     TransactionTemplate transactionTemplate(PlatformTransactionManager transactionManager) {
         return new TransactionTemplate(transactionManager);
+    }
+
+    public static void main(String[] args) {
+        ConfigurableApplicationContext applicationContext = SpringUtils
+                .run(Application.class, "prod");
+        CustomerService customerService = applicationContext
+                .getBean(CustomerService.class);
+        Demo.workWithCustomerService(Application.class, customerService);
     }
 }
