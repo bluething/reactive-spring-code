@@ -11,6 +11,8 @@ import java.util.function.Consumer;
 public class Synchronous implements Reader {
     @Override
     public void read(File file, Consumer<Bytes> consumer, Runnable finished) throws IOException {
+        try (FileInputStream fin = new FileInputStream(file)) {
 
+        }
     }
 }
