@@ -22,6 +22,7 @@ public class Asynchronous implements Reader, CompletionHandler<Integer, ByteBuff
     private AsynchronousFileChannel fileChannel;
     private final ExecutorService executorService = Executors.newFixedThreadPool(10);
     private long position;
+    private int bytesRead;
 
     @Override
     public void read(File file, Consumer<Bytes> consumer, Runnable finished) throws IOException {
@@ -35,8 +36,18 @@ public class Asynchronous implements Reader, CompletionHandler<Integer, ByteBuff
     }
 
     @Override
-    public void completed(Integer result, ByteBuffer attachment) {
+    public void completed(Integer result, ByteBuffer buffer) {
+        this.bytesRead = result;
 
+        if (this.bytesRead < 0) {
+            this.finished.run();
+            return;
+        }
+
+        buffer.flip();
+
+        byte[] data = new byte[buffer.limit()];
+        buffer.get(data);
     }
 
     @Override
