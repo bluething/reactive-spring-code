@@ -48,6 +48,13 @@ public class Asynchronous implements Reader, CompletionHandler<Integer, ByteBuff
 
         byte[] data = new byte[buffer.limit()];
         buffer.get(data);
+
+        consumer.accept(Bytes.from(data, data.length));
+
+        buffer.clear();
+
+        this.position = this.position + this.bytesRead;
+        this.fileChannel.read(buffer, this.position, buffer, this);
     }
 
     @Override
