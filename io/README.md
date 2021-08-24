@@ -5,6 +5,11 @@ We can spin other thread (scale) but there are limit on how much thread can be c
 
 See more about [thread problem](https://github.com/bluething/learnjava/tree/main/threaddump).
 
+Why and when implement asynchronous read?
+
+Asynchronous code is complex. The complexity is worth it if our process is I/O bound. We can handle more request and do more work.  
+But if our process is CPU bound it doesn't give us extra benefit.
+
 ### Read more
 
 [Understanding CPU and I/O bound for asynchronous operations](https://www.hellsoft.se/understanding-cpu-and-i-o-bound-for-asynchronous-operations/)  
