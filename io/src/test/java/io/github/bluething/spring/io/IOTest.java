@@ -59,6 +59,11 @@ public class IOTest {
         test(() -> this.io.synchronousRead(this.file, this.bytesConsumer, this.onceDone));
     }
 
+    @Test
+    public void asynchronousRead() {
+        test(() -> this.io.asynchronousRead(this.file, this.bytesConsumer, this.onceDone));
+    }
+
     private void test(Runnable r) {
         try {
             r.run();
