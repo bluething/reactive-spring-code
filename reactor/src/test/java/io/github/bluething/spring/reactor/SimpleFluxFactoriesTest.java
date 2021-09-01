@@ -6,6 +6,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class SimpleFluxFactoriesTest {
@@ -27,6 +28,9 @@ public class SimpleFluxFactoriesTest {
 
         Flux<Integer> fromArray = Flux.fromArray(new Integer[]{1, 2, 3});
         StepVerifier.create(fromArray).expectNext(1, 2, 3).verifyComplete();
+
+        Flux<Integer> fromIterable = Flux.fromIterable(Arrays.asList(1, 2, 3));
+        StepVerifier.create(fromIterable).expectNext(1, 2, 3).verifyComplete();
 
     }
 }
