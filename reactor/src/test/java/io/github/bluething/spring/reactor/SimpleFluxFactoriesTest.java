@@ -22,5 +22,8 @@ public class SimpleFluxFactoriesTest {
         Mono<Date> greetingMono = Mono.just(new Date(now));
         StepVerifier.create(greetingMono).expectNext(new Date(now)).verifyComplete();
 
+        Mono<Object> empty = Mono.empty();
+        StepVerifier.create(empty).verifyComplete();
+
     }
 }
