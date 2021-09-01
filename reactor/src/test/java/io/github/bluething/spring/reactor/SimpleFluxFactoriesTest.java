@@ -12,5 +12,8 @@ public class SimpleFluxFactoriesTest {
         Publisher<Integer> rangeOfInteger = Flux.range(0, 10);
         StepVerifier.create(rangeOfInteger).expectNextCount(10).verifyComplete();
 
+        Flux<String> letters = Flux.just("A", "B", "C");
+        StepVerifier.create(letters).expectNext("A", "B", "C").verifyComplete();
+
     }
 }
