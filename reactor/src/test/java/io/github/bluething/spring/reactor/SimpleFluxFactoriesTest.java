@@ -25,5 +25,8 @@ public class SimpleFluxFactoriesTest {
         Mono<Object> empty = Mono.empty();
         StepVerifier.create(empty).verifyComplete();
 
+        Flux<Integer> fromArray = Flux.fromArray(new Integer[]{1, 2, 3});
+        StepVerifier.create(fromArray).expectNext(1, 2, 3).verifyComplete();
+
     }
 }
