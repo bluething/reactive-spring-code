@@ -3,6 +3,7 @@ package io.github.bluething.spring.reactive.joshbook.reactor;
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.FlowAdapters;
 import org.reactivestreams.Publisher;
+import reactor.adapter.JdkFlowAdapter;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
@@ -23,6 +24,12 @@ public class FlowAndReactiveStreamsTest {
                 .expectNextCount(10)
                 .verifyComplete();
         StepVerifier.create(rangeOfIntegerAsReactiveStream)
+                .expectNextCount(10)
+                .verifyComplete();
+
+        Flux<Integer> rangeIntegerAsReactorFluxAgain = JdkFlowAdapter
+                .flowPublisherToFlux(rangeOfIntegerAsJdk9Flow);
+        StepVerifier.create(rangeIntegerAsReactorFluxAgain)
                 .expectNextCount(10)
                 .verifyComplete();
     }
