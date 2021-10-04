@@ -54,6 +54,15 @@ It's just a bridge, implementing both `Publisher<T>` and `Subscriber<T>`. It's a
 
 Is a concrete class that help us adapt reactive stream types interchangeably to and from the Java 9 `Flow` analogs.
 
+#### Flux<T> and Mono<T>
+
+Reactor provides two specializations of `Publisher<T>`  
+1. `Flux<T>`, provide zero or more values. It's unbounded.  
+2. `Mono<T>`, provide zero or one values.
+
+The recommendation is use `Publisher<T>` as an argument and return a `Flux<T>` or `Mono<T>`.  
+Our client decide what kind of data given.
+
 ### Read more
 
 [reactive-streams-jvm](https://github.com/reactive-streams/reactive-streams-jvm)

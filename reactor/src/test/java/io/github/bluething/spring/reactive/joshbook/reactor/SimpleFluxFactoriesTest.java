@@ -1,4 +1,4 @@
-package io.github.bluething.spring.reactor;
+package io.github.bluething.spring.reactive.joshbook.reactor;
 
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
