@@ -63,6 +63,11 @@ Reactor provides two specializations of `Publisher<T>`
 The recommendation is use `Publisher<T>` as an argument and return a `Flux<T>` or `Mono<T>`.  
 Our client decide what kind of data given.
 
+The best part of reactive programming is that it gives us one kinda "stuff", a uniform interface for dealing with asynchronous streams in an asynchronous world.  
+The challenge is how to adapt the real world's asynchronous events into the requisite `Publisher<T>` interface.  
+- How do you take events from a Spring Integration inbound adapter and turn it into stream?  
+- How do you take data emitted from an existing threaded application and process them as a reactive stream?
+
 ### Read more
 
 [reactive-streams-jvm](https://github.com/reactive-streams/reactive-streams-jvm)
