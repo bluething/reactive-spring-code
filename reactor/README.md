@@ -68,6 +68,59 @@ The challenge is how to adapt the real world's asynchronous events into the requ
 - How do you take events from a Spring Integration inbound adapter and turn it into stream?  
 - How do you take data emitted from an existing threaded application and process them as a reactive stream?
 
+#### Operators
+
+Each `Publisher<T>` is immutable, operators create new `Publisher<T>`.
+
+##### `transform`
+
+What if we want to operate on existing publisher? Use `transform`, it give use reference to the current publisher.  
+It gives us a chance to change the publisher at assembly time, on initialization.
+
+##### Do this and then that
+
+In asynchronous and reactive world we don't have guarantees about the order of process.  
+If we want same behavior with non-asynchronous programming, use `thenMany`
+
+##### `map`
+
+This function modifies each item by the source `Publisher<T>` and emits the modified item.  
+The source stream replaced by another stream with value is output from the `map`
+
+##### `flatMap` and `concatMap`
+
+What if we want to take each item from publisher then call another service that return a `Publisher<T>`?  
+Using `map` we will get Publisher<Publisher<T>> return type.
+
+`flatMap` and `concatMap` merge items emitted by inner streams into the outer stream.  
+The difference between them is that the order in which the item arrive. `flatMap` interleaves items, the order may be different.  
+`concatMap` preserves the order of items. The price is we have to wait for each Publisher<T> to complete its work. We lose asynchronicity.
+
+Use case for `concatMap` is event processing. Our message represent state mutation, "read"-"update"-"read"-"delete"-"delete".  
+We want to proceed the message in the same order.
+
+##### `switchMap`
+
+`switchMap` cancels any outstanding inner publishers as soon as a new value arrives.  
+The use case is autocomplete. Our typing speed faster than network call. `switchMap` will cancel previous incomplete network calls.
+
+##### `take` and `filter`
+
+We use `take(long)` to limit the number of elements.  
+If we want to apply some predicate and stop consuming message when the predicate matches, use `takeUntil(Predicate)`  
+Other variant is `take(Duration)`
+
+We can selectively filter out some values with `filter`.  
+This operator will discard the values that doesn't match the predicate.
+
+##### doOn* callback
+
+Use when we want to peek into the stream.
+
+##### Taking control of your stream's destiny
+
+Control for more complex logic using `handle`
+
 ### Read more
 
 [reactive-streams-jvm](https://github.com/reactive-streams/reactive-streams-jvm)
